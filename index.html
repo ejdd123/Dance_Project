@@ -7,7 +7,7 @@
 
 <script>
 function open_join() {
-	window.location.href='../Dance_Project/member/join.jsp' ;
+	window.location.href='../dance_project/member/join.jsp' ;
 	// self.close();				// 현재 페이지(로그인 팝업) 닫기
 }
 
@@ -31,7 +31,7 @@ function before_login() {
 
 <body>
 
-	<form id="loginMember" action="../Dance_Project/MemberServlet/login.do?me_id=${me_id }&me_password=${me_password }" target="login.do">
+	<form id="loginMember" action="../Dance_Project/MemberServlet/login.do?me_id=${me_id }&me_password=${me_password }">
 		<table align="center">
 			<tr>
 				<td>아이디</td>
