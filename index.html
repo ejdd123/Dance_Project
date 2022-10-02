@@ -7,7 +7,7 @@
 
 <script>
 function open_join() {
-	window.location.href='../Dance_Project/index.jsp' ;
+	window.location.href='/join.jsp' ;
 	// self.close();				// 현재 페이지(로그인 팝업) 닫기
 }
 
@@ -31,7 +31,7 @@ function before_login() {
 
 <body>
 
-	<form id="loginMember" action="../Dance_Project/MemberServlet/login.do?me_id=${me_id }&me_password=${me_password }">
+	<form id="loginMember" action="../Dance_Project/MemberServlet/login.do?me_id=${me_id }&me_password=${me_password }" target="login.do">
 		<table align="center">
 			<tr>
 				<td>아이디</td>
@@ -49,5 +49,6 @@ function before_login() {
 			<input id="login" name="login" type="submit" value="로그인" onclick="return before_login()">		<!-- return : 에러가 발생하면 다음 이벤트가 동작하지 않음 -->
 		</p>
 	</form>
+	
 </body>
 </html>
