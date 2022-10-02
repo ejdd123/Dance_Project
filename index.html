@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script>
+function open_join() {
+	window.location.href='../Dance_Project/member/join.jsp' ;
+	// self.close();				// 현재 페이지(로그인 팝업) 닫기
+}
+
+function before_login() {
+	if(!document.getElementById('me_id').value) {
+		alert('아이디를 입력하세요.');
+		document.getElementById('me_id').focus();
+		
+		return false;
+	} else if(!document.getElementById('me_password').value) {
+		alert('비밀번호를 입력하세요.');
+		document.getElementById('me_password').focus();
+		
+		return false;
+	}
+	
+	// 현재 페이지(로그인 팝업) 닫기
+	self.close();
+}
+</script>
+
+<body>
+
+	<form id="loginMember" action="../Dance_Project/MemberServlet/login.do?me_id=${me_id }&me_password=${me_password }" target="login.do">
+		<table align="center">
+			<tr>
+				<td>아이디</td>
+				<td><input id="me_id" name= "me_id" type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>비밀번호</td>
+				<td><input id="me_password" name= "me_password" type="text"></td>
+			</tr>
+		</table>
+		
+		<p align="center">
+			<input type="button" value="회원가입" onclick="open_join()">
+			<input id="login" name="login" type="submit" value="로그인" onclick="return before_login()">		<!-- return : 에러가 발생하면 다음 이벤트가 동작하지 않음 -->
+		</p>
+	</form>
+</body>
+</html>
