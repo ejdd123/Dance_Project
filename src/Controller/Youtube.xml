@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Mybatis 설정 시 DOCTYPE 필수 입력-->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="Youtube">
+ 
+<!-- 유튜브 영상 업로드 -->
+<insert id="uploadVideo">
+ INSERT INTO YOUTUBE( YT_ID
+									  , SINGER
+									  , TITLE
+					                  , YT_URL
+					                  , YT_PASSWORD 
+					                  , ME_ID )
+					   VALUES ( ( SELECT IFNULL(MAX(YT_ID) + 1, 1) FROM YOUTUBE AS YT_ID )		<!-- 최대 YT_ID 숫자에서 +1 하여 추가하기, 첫 영상이면 1 -->
+									  , #{singer}
+					                  , #{title}
+					                  , #{yt_url}
+					                  , #{yt_password}
+					                  , #{me_id}
+					                  )
+</insert>
+
+<!-- 업로드한 유튜브 영상 조회 -->
+<select id="selectVideoList" resultType="DTO.youtubeDTO">
+SELECT *
+  FROM YOUTUBE
+</select>
+
+<!-- 유튜브 영상 삭제 -->
+<delete id="deleteVideo">
+DELETE
+   FROM YOUTUBE 
+ WHERE YT_ID = #{yt_id}
+</delete>
+
+<!-- 메시지 보내기 -->
+<insert id="sendMessage">
+INSERT INTO YOUTUBE_MSG ( MSG_ID
+											   , FROM_MSG
+					                           , TO_MSG
+					                           , TITLE
+					                           , CONTENT
+					                           , MSG_DATE
+					                           )
+								VALUES ( ( SELECT IFNULL(MAX(MSG_ID) + 1, 1) FROM YOUTUBE_MSG AS MSG_ID)
+												, #{from_msg}
+												, #{to_msg}
+												, #{title}
+												, #{content}
+				                    			, NOW()						<!-- 현재 시간 (메시지 전송한 시간) -->
+												)
+</insert>
+
+</mapper>
