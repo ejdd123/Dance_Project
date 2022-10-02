@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- The contents of this file will be loaded for each web application --><Context>
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+    
+	<!-- 데이터 베이스에 접속하기 위한 정보 (DB Connection Pool) -->
+    <!-- 추가한 옵션
+    	name :  DB Connection Pool 이름 - mapper 패키지 내의 SqlConfig.xml(마이바티스 환경설정) 파일에서 필요함
+	    removeAbandonedOnBorrow : 사용할 수 있는 커넥션이 부족해지면 DBCP(DataBase Connection Pool)은 버려진 커넥션을 찾아 복구합니다.
+		logAbandoned : 커넥션 자원이 낭비되고 있는 위치를 로그로 출력합니다. 
+	-->
+	<Resource 
+		name="jdbc/mysql"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/dance?serverTimezone=UTC"
+		username="root"
+		password="1234"
+		maxTotal="100"
+		minIdle="10"
+		maxWait="10000"
+		
+		removeAbandonedOnBorrow="true"
+		logAbandoned="true"
+	/>
+	
+</Context>
